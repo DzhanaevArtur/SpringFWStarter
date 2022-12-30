@@ -2,6 +2,7 @@ package ru.Dzhanaev.SpringFWStarter.lesson4;
 
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.Contract;
+import ru.Dzhanaev.SpringFWStarter.common.Music;
 
 /**
  * @author Artur Dzhanaev

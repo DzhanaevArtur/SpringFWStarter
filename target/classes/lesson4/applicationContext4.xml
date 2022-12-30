@@ -4,7 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="classical4" class="ru.Dzhanaev.SpringFWStarter.lesson4.Classical"/>
-    <bean id="hipHop4" class="ru.Dzhanaev.SpringFWStarter.lesson4.HipHop"/>
-    <bean id="ossetian4" class="ru.Dzhanaev.SpringFWStarter.lesson4.Ossetian"/>
+    <bean id="classical4" class="ru.Dzhanaev.SpringFWStarter.Classical"/>
+    <bean id="hipHop4" class="ru.Dzhanaev.SpringFWStarter.HipHop"/>
+    <bean id="ossetian4" class="ru.Dzhanaev.SpringFWStarter.Ossetian"/>
 </beans>

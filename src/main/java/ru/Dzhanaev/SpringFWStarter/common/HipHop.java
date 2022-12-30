@@ -1,4 +1,4 @@
-package ru.Dzhanaev.SpringFWStarter.lesson4;
+package ru.Dzhanaev.SpringFWStarter.common;
 
 import lombok.extern.slf4j.Slf4j;
 

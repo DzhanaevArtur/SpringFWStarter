@@ -1,7 +1,10 @@
 package ru.Dzhanaev.SpringFWStarter.lesson6;
 
 import lombok.extern.slf4j.Slf4j;
-import org.jetbrains.annotations.Contract;
+import ru.Dzhanaev.SpringFWStarter.common.Music;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Artur Dzhanaev
@@ -11,10 +14,39 @@ import org.jetbrains.annotations.Contract;
 public class Player {
 
 
-    private final Music music;
+    private List<Music> list = new ArrayList<>();
+
+    private Music music;
+
+    private String name;
+
+    private int volume;
 
 
-    @Contract(pure = true) public Player(Music music) { this.music = music; }
+    public List<Music> getList() { return list; }
 
-    void play() { log.info("Song name: {}\t\t Song author: {}", music.getSong(), music.getAuthor()); }
+    public void setList(List<Music> list) { this.list = list; }
+
+    public Music getMusic() { return music; }
+
+    public void setMusic(Music music) { this.music = music; }
+
+    public String getName() { return name; }
+
+    public void setName(String name) { this.name = name; }
+
+    public int getVolume() { return volume; }
+
+    public void setVolume(int volume) { this.volume = volume; }
+
+    void play() {
+        log.info("Song name: {}\tSong author: {}\tPlayer vendor: {}\tWith max volume: {}dB",
+                music.getSong(), music.getAuthor(), name, volume);
+    }
+
+    void playList() {
+        log.info("\n");
+        for (Music music : list) log.info("Song name: {}\tSong author: {}\tPlayer vendor: {}\tWith max volume: {}dB",
+                music.getSong(), music.getAuthor(), name, volume);
+    }
 }

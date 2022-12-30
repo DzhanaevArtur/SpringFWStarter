@@ -6,20 +6,19 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context
-       http://www.springframework.org/schema/context/spring-context.xsd
-       http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
+       http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
 
     <context:property-placeholder location="classpath:lesson6/lesson6.properties"/>
 
-    <bean id="classical6" class="ru.Dzhanaev.SpringFWStarter.common.Classical"/>
-    <bean id="hipHop6"    class="ru.Dzhanaev.SpringFWStarter.common.HipHop"/>
-    <bean id="ossetian6"  class="ru.Dzhanaev.SpringFWStarter.common.Ossetian"/>
+    <bean id="classical6" class="ru.Dzhanaev.SpringFWStarter.Classical"/>
+    <bean id="hipHop6"    class="ru.Dzhanaev.SpringFWStarter.HipHop"/>
+    <bean id="ossetian6"  class="ru.Dzhanaev.SpringFWStarter.Ossetian"/>
     <bean id="props6"     class="ru.Dzhanaev.SpringFWStarter.lesson6.Props"/>
 
-    <util:list id="listOfMusic" value-type="ru.Dzhanaev.SpringFWStarter.common.Music">
-        <bean id="listClassical6" class="ru.Dzhanaev.SpringFWStarter.common.Classical"/>
-        <bean id="listHipHop6"    class="ru.Dzhanaev.SpringFWStarter.common.HipHop"/>
-        <bean id="listOssetian6"  class="ru.Dzhanaev.SpringFWStarter.common.Ossetian"/>
+    <util:list id="listOfMusic" value-type="ru.Dzhanaev.SpringFWStarter.Music">
+        <bean id="listClassical6" class="ru.Dzhanaev.SpringFWStarter.Classical"/>
+        <bean id="listHipHop6"    class="ru.Dzhanaev.SpringFWStarter.HipHop"/>
+        <bean id="listOssetian6"  class="ru.Dzhanaev.SpringFWStarter.Ossetian"/>
         <bean id="listProps6"     class="ru.Dzhanaev.SpringFWStarter.lesson6.Props"/>
     </util:list>
 

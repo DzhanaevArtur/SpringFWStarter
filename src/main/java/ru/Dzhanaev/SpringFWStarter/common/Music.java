@@ -1,4 +1,4 @@
-package ru.Dzhanaev.SpringFWStarter.lesson6;
+package ru.Dzhanaev.SpringFWStarter.common;
 
 public interface Music {
 

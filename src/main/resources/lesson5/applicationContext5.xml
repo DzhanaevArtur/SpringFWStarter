@@ -4,9 +4,9 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="classical5" class="ru.Dzhanaev.SpringFWStarter.lesson5.Classical"/>
-    <bean id="hipHop5" class="ru.Dzhanaev.SpringFWStarter.lesson5.HipHop"/>
-    <bean id="ossetian5" class="ru.Dzhanaev.SpringFWStarter.lesson5.Ossetian"/>
+    <bean id="classical5" class="ru.Dzhanaev.SpringFWStarter.common.Classical"/>
+    <bean id="hipHop5" class="ru.Dzhanaev.SpringFWStarter.common.HipHop"/>
+    <bean id="ossetian5" class="ru.Dzhanaev.SpringFWStarter.common.Ossetian"/>
 
     <bean id="playerClassical5" class="ru.Dzhanaev.SpringFWStarter.lesson5.Player">
         <constructor-arg ref="classical5"/>
