@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="classical4" class="ru.Dzhanaev.SpringFWStarter.lessons.common.Classical"/>
+    <bean id="hipHop4" class="ru.Dzhanaev.SpringFWStarter.lessons.common.HipHop"/>
+    <bean id="ossetian4" class="ru.Dzhanaev.SpringFWStarter.lessons.common.Ossetian"/>
+</beans>

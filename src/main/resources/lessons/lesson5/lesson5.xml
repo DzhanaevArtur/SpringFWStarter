@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="classical5" class="ru.Dzhanaev.SpringFWStarter.lessons.common.Classical"/>
+    <bean id="hipHop5" class="ru.Dzhanaev.SpringFWStarter.lessons.common.HipHop"/>
+    <bean id="ossetian5" class="ru.Dzhanaev.SpringFWStarter.lessons.common.Ossetian"/>
+
+    <bean id="playerClassical5" class="ru.Dzhanaev.SpringFWStarter.lessons.lesson5.Player">
+        <constructor-arg ref="classical5"/>
+    </bean>
+    <bean id="playerHipHop5" class="ru.Dzhanaev.SpringFWStarter.lessons.lesson5.Player">
+        <constructor-arg ref="hipHop5"/>
+    </bean>
+    <bean id="playerOssetian5" class="ru.Dzhanaev.SpringFWStarter.lessons.lesson5.Player">
+        <constructor-arg ref="ossetian5"/>
+    </bean>
+</beans>
