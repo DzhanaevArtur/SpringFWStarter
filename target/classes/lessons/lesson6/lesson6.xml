@@ -9,7 +9,7 @@
        http://www.springframework.org/schema/context/spring-context.xsd
        http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
 
-    <context:property-placeholder location="classpath:lessons/lesson6/lesson6/lesson6.properties"/>
+    <context:property-placeholder location="classpath:lessons/lesson6/lesson6.properties"/>
 
     <bean id="classical6" class="ru.Dzhanaev.SpringFWStarter.lessons.common.Classical"/>
     <bean id="hipHop6"    class="ru.Dzhanaev.SpringFWStarter.lessons.common.HipHop"/>

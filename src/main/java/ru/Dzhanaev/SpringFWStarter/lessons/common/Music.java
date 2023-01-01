@@ -16,4 +16,6 @@ public interface Music {
     default void init() { log.info("{} init work", getClass().getSimpleName()); }
 
     default void destroy() { log.info("{} destroy work", getClass().getSimpleName()); }
+
+    default void info() { log.info("Song {} with author {}", getSong(), getAuthor()); }
 }

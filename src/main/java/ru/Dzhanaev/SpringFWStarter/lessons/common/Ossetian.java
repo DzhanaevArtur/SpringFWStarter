@@ -3,12 +3,14 @@ package ru.Dzhanaev.SpringFWStarter.lessons.common;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.stereotype.Component;
 
 /**
  * @author Artur Dzhanaev
  * @created 30.12.2022
  */
 @Slf4j
+@Component("ossetian9")
 public class Ossetian implements Music {
 
 
