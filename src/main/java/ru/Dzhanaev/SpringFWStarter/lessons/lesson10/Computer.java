@@ -25,9 +25,7 @@ public class Computer {
 
     @Autowired()
     @Contract(pure = true)
-    public Computer(Player player) {
-        this.player = player;
-    }
+    public Computer(Player player) { this.player = player; }
 
     @Override
     public String toString() {

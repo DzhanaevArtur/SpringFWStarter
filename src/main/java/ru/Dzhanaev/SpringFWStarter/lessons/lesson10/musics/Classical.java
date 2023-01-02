@@ -5,6 +5,8 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import java.util.List;
 import java.util.Random;
 
@@ -15,7 +17,7 @@ import java.util.Random;
 @Slf4j
 @Component("classical10")
 @Scope("singleton")
-@PropertySource("classpath:lessons/lesson12/lesson12.properties")
+@PropertySource("classpath:lessons/lesson10/lesson10.properties")
 public class Classical implements Music {
 
 
@@ -29,10 +31,8 @@ public class Classical implements Music {
 
     private final Song song = list.get(new Random().nextInt(list.size()));
 
-//    @Value("${name}")
     private final String name = song.getName();
 
-//    @Value("${author}")
     private final String author = song.getAuthor();
 
     @Override
@@ -40,4 +40,10 @@ public class Classical implements Music {
 
     @Override
     public String getAuthor() { return author; }
+
+    @PostConstruct
+    private void analogueOfInit() { log.info("Inside classical init"); }
+
+    @PreDestroy
+    private void analogueOfDestroy() { log.info("Inside classical Destroy"); }
 }
