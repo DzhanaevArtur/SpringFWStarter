@@ -5,6 +5,7 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import ru.Dzhanaev.SpringFWStarter.lessons.lesson10.musics.*;
 
@@ -14,6 +15,7 @@ import ru.Dzhanaev.SpringFWStarter.lessons.lesson10.musics.*;
  */
 @Slf4j
 @Component ("player10")
+@Scope("singleton")
 public class Player {
 
 

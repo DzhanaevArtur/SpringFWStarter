@@ -1,4 +1,4 @@
-package ru.Dzhanaev.SpringFWStarter.lessons.lesson10;
+package ru.Dzhanaev.SpringFWStarter.lessons.lesson10.musics;
 
 import lombok.Getter;
 import lombok.Setter;

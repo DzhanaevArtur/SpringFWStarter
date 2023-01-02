@@ -1,8 +1,8 @@
 package ru.Dzhanaev.SpringFWStarter.lessons.lesson10.musics;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import ru.Dzhanaev.SpringFWStarter.lessons.lesson10.Song;
 
 import java.util.List;
 import java.util.Random;
@@ -13,6 +13,7 @@ import java.util.Random;
  */
 @Slf4j
 @Component("pop10")
+@Scope("singleton")
 public class Pop implements Music {
 
 

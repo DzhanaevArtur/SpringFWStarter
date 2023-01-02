@@ -1,8 +1,9 @@
 package ru.Dzhanaev.SpringFWStarter.lessons.lesson10.musics;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import ru.Dzhanaev.SpringFWStarter.lessons.lesson10.Song;
 
 import java.util.List;
 import java.util.Random;
@@ -13,6 +14,8 @@ import java.util.Random;
  */
 @Slf4j
 @Component("classical10")
+@Scope("singleton")
+@PropertySource("classpath:lessons/lesson12/lesson12.properties")
 public class Classical implements Music {
 
 
@@ -26,10 +29,15 @@ public class Classical implements Music {
 
     private final Song song = list.get(new Random().nextInt(list.size()));
 
+//    @Value("${name}")
+    private final String name = song.getName();
+
+//    @Value("${author}")
+    private final String author = song.getAuthor();
 
     @Override
-    public String getSong() { return song.getName(); }
+    public String getSong() { return name; }
 
     @Override
-    public String getAuthor() { return song.getAuthor(); }
+    public String getAuthor() { return author; }
 }
