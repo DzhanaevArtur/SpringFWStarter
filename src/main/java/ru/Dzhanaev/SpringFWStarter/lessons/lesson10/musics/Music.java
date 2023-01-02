@@ -1,4 +1,4 @@
-package ru.Dzhanaev.SpringFWStarter.lessons.lesson10;
+package ru.Dzhanaev.SpringFWStarter.lessons.lesson10.musics;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,5 +13,5 @@ public interface Music {
 
     String getAuthor();
 
-    default void info() { log.info("Song {} with author {}", getSong(), getAuthor()); }
+    default String info() { return String.format("Song %s with author %s", getSong(), getAuthor()); }
 }

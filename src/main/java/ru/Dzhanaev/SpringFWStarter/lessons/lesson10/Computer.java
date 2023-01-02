@@ -4,6 +4,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.Contract;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import ru.Dzhanaev.SpringFWStarter.lessons.lesson10.musics.Genre;
+
+import java.util.Random;
 
 /**
  * @author Artur Dzhanaev
@@ -14,17 +17,18 @@ import org.springframework.stereotype.Component;
 public class Computer {
 
 
-    private final int id;
+    public final static int ID = new Random().nextInt(Genre.values().length);
 
     private final Player player;
 
     @Autowired()
     @Contract(pure = true)
     public Computer(Player player) {
-        this.id = 69;
         this.player = player;
     }
 
     @Override
-    public String toString() { return "\nComputer {" + "\n\tid = " + id + ",\n\tplayer = " + player.play() + "\n}"; }
+    public String toString() {
+        return "\nComputer {" + "\n\tid = " + ID + ",\n\tplayer = " + player.play(Genre.values()[ID]) + "\n}";
+    }
 }

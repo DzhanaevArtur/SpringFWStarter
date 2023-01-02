@@ -12,10 +12,9 @@ public class Lesson10 {
 
 
     public static void main(String[] args) {
-        log.info(
-                new ClassPathXmlApplicationContext("lessons/lesson10/lesson10.xml")
-                        .getBean(Computer.class)
-                        .toString()
-        );
+        ClassPathXmlApplicationContext classPathXmlApplicationContext =
+                new ClassPathXmlApplicationContext("lessons/lesson10/lesson10.xml");
+        log.info(classPathXmlApplicationContext.getBean(Computer.class).toString());
+        classPathXmlApplicationContext.close();
     }
 }
