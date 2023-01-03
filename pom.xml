@@ -20,43 +20,57 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.13.2</version>
-            <scope>test</scope>
-        </dependency>
-
+        <!--Spring AOP provides an Alliance-compliant aspect-oriented programming implementation
+        allowing you to define method interceptors and pointcuts to cleanly decouple code
+        that implements functionality that should be separated-->
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
+            <artifactId>spring-aop</artifactId>
             <version>6.0.3</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-            <version>6.0.3</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
-            <version>6.0.3</version>
-        </dependency>
-
+        <!--Spring Beans provides the configuration framework
+        and basic functionality to instantiate, configure, and assemble java objects-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
             <version>6.0.3</version>
         </dependency>
 
+        <!--Spring Context provides access to configured objects like a registry (a context). It inherits its features
+        from Spring Beans and adds support for internationalization, event propagation, resource loading,
+        and the transparent creation of contexts-->
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
+            <artifactId>spring-context</artifactId>
             <version>6.0.3</version>
         </dependency>
 
+        <!--Support classes for integrating common third-party libraries into a Spring application context-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>6.0.3</version>
+        </dependency>
+
+        <!--Basic building block for Spring that in conjunction with Spring Beans provides DI and IoC features-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>6.0.3</version>
+        </dependency>
+
+        <!--Spring JDBC provides an abstraction layer that simplifies code to use JDBC
+        and the parsing of database-vendor specific error codes-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>6.0.3</version>
+        </dependency>
+
+        <!--Spring Test supports the unit testing and integration testing of Spring components with JUnit or TestNG.
+        It provides consistent loading and caching of Spring ApplicationContexts and provides mock objects
+        that you can use to test your code in isolation-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
@@ -64,25 +78,48 @@
             <scope>test</scope>
         </dependency>
 
+        <!--Support for programmatic and declarative transaction management for classes
+        that implement special interfaces or any POJO-->
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-aop</artifactId>
+            <artifactId>spring-tx</artifactId>
             <version>6.0.3</version>
         </dependency>
 
+        <!--Spring Web provides integration features such as multipart file upload functionality and
+        the initialization of the IoC container using Servlet listeners and a web-oriented application context.
+        It also contains an HTTP client and the web-related parts of Spring remote support-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>6.0.3</version>
+        </dependency>
+
+        <!--Spring webmvc contains Spring’s model-view-controller (MVC) and REST Web Services implementation
+        for web applications. It provides a clean separation between domain model code and web forms and integrates
+        with all the other features of the Spring Framework-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>6.0.3</version>
+        </dependency>
+
+        <!--Unit-tests-->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!--Logger-->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>2.0.5</version>
+            <version>2.0.6</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.24</version>
-            <scope>compile</scope>
-        </dependency>
-
+        <!--Logger fw-->
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
@@ -90,23 +127,41 @@
             <scope>compile</scope>
         </dependency>
 
+        <!--getters, setters & etc-->
         <dependency>
-            <groupId>org.jetbrains</groupId>
-            <artifactId>annotations-java5</artifactId>
-            <version>23.1.0</version>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.24</version>
             <scope>compile</scope>
         </dependency>
 
+        <!--A set of annotations used for code inspection support and code documentation-->
         <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-            <version>2.0.1.Final</version>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>23.1.0</version>
         </dependency>
 
+        <!--Common Annotations for the JavaTM Platform API-->
         <dependency>
             <groupId>javax.annotation</groupId>
             <artifactId>javax.annotation-api</artifactId>
             <version>1.3.2</version>
+        </dependency>
+
+        <!--Provides portable dependency injection annotations that can be used by any dependency injection framework-->
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+            <version>1</version>
+        </dependency>
+
+        <!--JavaBeans Validation (Bean Validation) is a validation model that can add constraints
+        to the beans with annotations placed on fields, methods, or classes-->
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>2.0.1.Final</version>
         </dependency>
     </dependencies>
 

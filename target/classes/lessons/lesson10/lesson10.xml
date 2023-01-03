@@ -8,4 +8,6 @@
        http://www.springframework.org/schema/context/spring-context.xsd">
 
     <context:component-scan base-package="ru.Dzhanaev.SpringFWStarter.lessons.lesson10"/>
+
+    <context:property-placeholder location="lessons/lesson10/lesson10.properties"/>
 </beans>
