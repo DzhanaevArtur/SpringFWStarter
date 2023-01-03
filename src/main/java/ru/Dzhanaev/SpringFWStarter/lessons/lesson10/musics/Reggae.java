@@ -9,18 +9,18 @@ import java.util.Random;
 
 /**
  * @author Artur Dzhanaev
- * @created 30.12.2022
+ * @created 03.01.2023
  */
 @Slf4j
-public class Classical implements Music {
+public class Reggae implements Music {
 
 
     private final List<Song> list = List.of(
-            new Song("Injection",              "Hans Zimmer"),
-            new Song("For Elise",              "Ludwig van Beethoven"),
-            new Song("Eine kleine Nachtmusik", "Mozart"),
-            new Song("The Four Seasons",       "Vivaldi"),
-            new Song("Time",                   "Hans Zimmer")
+            new Song("No Woman No Cry", "Bob Marley"),
+            new Song("Sun Is Shining",  "Bob Marley"),
+            new Song("Is This Love",    "Bob Marley"),
+            new Song("Get Up Stand Up", "Bob Marley"),
+            new Song("Buffalo Soldier", "Bob Marley")
     );
 
     private final Song song = list.get(new Random().nextInt(list.size()));
@@ -36,8 +36,8 @@ public class Classical implements Music {
     public String getAuthor() { return author; }
 
     @PostConstruct
-    private void analogueOfInit() { log.info("Inside classical init"); }
+    private void analogueOfInit() { log.info("Inside reggae init"); }
 
     @PreDestroy
-    private void analogueOfDestroy() { log.info("Inside classical Destroy"); }
+    private void analogueOfDestroy() { log.info("Inside reggae Destroy"); }
 }

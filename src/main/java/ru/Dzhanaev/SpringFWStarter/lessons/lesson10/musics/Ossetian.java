@@ -1,9 +1,6 @@
 package ru.Dzhanaev.SpringFWStarter.lessons.lesson10.musics;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -15,9 +12,6 @@ import java.util.Random;
  * @created 30.12.2022
  */
 @Slf4j
-@Component("ossetian10")
-@Scope("singleton")
-@PropertySource("classpath:lessons/lesson10/lesson10.properties")
 public class Ossetian implements Music {
 
 

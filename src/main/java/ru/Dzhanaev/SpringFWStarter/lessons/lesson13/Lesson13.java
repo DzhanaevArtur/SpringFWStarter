@@ -13,8 +13,7 @@ public class Lesson13 {
 
     public static void main(String[] args) {
         AnnotationConfigApplicationContext c = new AnnotationConfigApplicationContext(SpringConfig.class);
-        SpringConfig springConfig = c.getBean(SpringConfig.class);
-        springConfig.getGym0();
+        log.info(c.getBean(SpringConfig.class).computer().toString());
         c.close();
     }
 }

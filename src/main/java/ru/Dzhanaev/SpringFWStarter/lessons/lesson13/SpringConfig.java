@@ -3,6 +3,12 @@ package ru.Dzhanaev.SpringFWStarter.lessons.lesson13;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
+import ru.Dzhanaev.SpringFWStarter.lessons.lesson10.Computer;
+import ru.Dzhanaev.SpringFWStarter.lessons.lesson10.Player;
+import ru.Dzhanaev.SpringFWStarter.lessons.lesson10.musics.*;
+
+import java.util.List;
 
 /**
  * @author Artur Dzhanaev
@@ -14,18 +20,13 @@ public class SpringConfig {
 
 
     @Bean
-    public Train getTrain1() {
-        return new Train1();
-    }
+    @Scope("singleton")
+    public List<Music> list(){ return List.of(new Classical(), new HipHop(), new Ossetian(), new Reggae()); }
 
     @Bean
-    public Train getTrain2() {
-        return new Train2();
-    }
-
-    @Bean
-    public Gym getGym0() {
-        return new Gym(getTrain2());
+    @Scope("singleton")
+    public Computer computer() {
+        return new Computer(new Player(list()));
     }
 }
 
