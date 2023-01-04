@@ -173,6 +173,13 @@
             <version>3.1.1.RELEASE</version>
         </dependency>
 
+        <!--Java Servlet is the foundation web specification in the Java Enterprise Platform. Developers can build
+        web applications using the Servlet API to interact with the request/response workflow-->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>4.0.1</version>
+        </dependency>
     </dependencies>
 
     <build>

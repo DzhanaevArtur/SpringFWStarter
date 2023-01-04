@@ -10,13 +10,11 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 @Slf4j
 @Controller
-public class Hello {
+public class HelloController {
 
 
-    @GetMapping("/firstTry")
-    public String writeHello() { return "firstTry"; }
-
-
-    @GetMapping("/second")
-    public String secondTry() { return "second"; }
+    @GetMapping("/fuck")
+    String fuck() {
+        return "fuck";
+    }
 }
