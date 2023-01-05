@@ -174,11 +174,20 @@
         </dependency>
 
         <!--Java Servlet is the foundation web specification in the Java Enterprise Platform. Developers can build
-        web applications using the Servlet API to interact with the request/response workflow-->
+         web applications using the Servlet API to interact with the request/response workflow-->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <version>4.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!--Jakarta Servlet-->
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>6.0.0</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
