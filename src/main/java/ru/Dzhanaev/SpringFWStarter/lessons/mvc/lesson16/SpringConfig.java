@@ -56,6 +56,5 @@ public class SpringConfig implements WebMvcConfigurer {
         ThymeleafViewResolver thymeleafViewResolver = new ThymeleafViewResolver();
         thymeleafViewResolver.setTemplateEngine(templateEngine());
         registry.viewResolver(thymeleafViewResolver);
-
     }
 }

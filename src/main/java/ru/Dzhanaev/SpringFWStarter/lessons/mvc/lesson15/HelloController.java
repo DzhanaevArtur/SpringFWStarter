@@ -15,4 +15,7 @@ public class HelloController {
 
     @GetMapping("/fuck")
     String fuck() { return "fuck"; }
+
+
+    void archill() {}
 }
