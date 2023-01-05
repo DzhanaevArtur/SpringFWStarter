@@ -14,8 +14,5 @@ public class HelloController {
 
 
     @GetMapping("/fuck")
-    String fuck() { return "fuck"; }
-
-
-    void archill() {}
+    String fuck() { return "lesson15/fuck"; }
 }

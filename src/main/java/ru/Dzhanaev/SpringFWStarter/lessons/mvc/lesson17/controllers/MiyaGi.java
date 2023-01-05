@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Slf4j
 @Controller
-@RequestMapping(value = "/gio", method = RequestMethod.GET)
-public class Gio {
+@RequestMapping(value = "/miyagi", method = RequestMethod.GET)
+public class MiyaGi {
 
 
-    @GetMapping("/pika")
-    public String getGioPika() { return "gioPika"; }
+    @GetMapping("/try")
+    public String getTry() { return "lesson17/Try"; }
 
 
-    @GetMapping("/r")
-    public String getGioR() { return "gioR"; }
+    @GetMapping("/tantra")
+    public String getTantra() { return "lesson17/Tantra"; }
 }
