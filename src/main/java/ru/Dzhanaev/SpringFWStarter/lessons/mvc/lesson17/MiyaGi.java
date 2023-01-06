@@ -1,8 +1,6 @@
 package ru.Dzhanaev.SpringFWStarter.lessons.mvc.lesson17;
 
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,9 +37,10 @@ public class MiyaGi {
     }
 
     @GetMapping("/try")
-    public String getTry(@NotNull HttpServletRequest httpServletRequest) {
-        String a = httpServletRequest.getParameter("a");
-        String b = httpServletRequest.getParameter("b");
+    public String getTry(
+            @RequestParam(value = "a", required = false) String a,
+            @RequestParam(value = "b", required = false) String b
+    ) {
         if (a != null && b != null) log.info(a + "\t\t" + b);
         return "/html/lesson17Try";
     }
