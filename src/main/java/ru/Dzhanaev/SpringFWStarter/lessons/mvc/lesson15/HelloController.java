@@ -13,6 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HelloController {
 
 
-    @GetMapping("/fuck")
-    String fuck() { return "lesson15/fuck"; }
+    @GetMapping("/lesson15")
+    String lesson15() { return "/html/lesson15"; }
 }
