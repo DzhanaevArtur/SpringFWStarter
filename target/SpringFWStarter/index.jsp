@@ -1,6 +1,11 @@
 <html>
     <body>
+        <h1>Bairai, Artur!</h1>
+        <a href="/miyagi/colors">Colors</a>
+        <br>
         <a href="/miyagi/tantra">Tantra</a>
-        <h2>It is inside index.jsp!</h2>
+        <br>
+        <a href="/miyagi/try">Try</a>
+        <br>
     </body>
 </html>
