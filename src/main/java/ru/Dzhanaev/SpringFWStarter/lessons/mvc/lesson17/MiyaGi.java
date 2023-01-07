@@ -2,6 +2,7 @@ package ru.Dzhanaev.SpringFWStarter.lessons.mvc.lesson17;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,9 +21,10 @@ public class MiyaGi {
     @GetMapping("/colors")
     public String getColors(
             @RequestParam(value = "a", required = false) String a,
-            @RequestParam(value = "b", required = false) String b
+            @RequestParam(value = "b", required = false) String b,
+            Model model
     ) {
-        if (a != null && b != null) log.info(a + "\t\t" + b);
+        if (a != null && b != null) model.addAttribute("output", String.format("Hello, dear %s %s", a, b));
         return "/html/lesson17Colors";
     }
 
@@ -30,18 +32,20 @@ public class MiyaGi {
     @GetMapping("/tantra")
     public String getTantra(
             @RequestParam(value = "a", required = false) String a,
-            @RequestParam(value = "b", required = false) String b
+            @RequestParam(value = "b", required = false) String b,
+            Model model
     ) {
-        if (a != null && b != null) log.info(a + "\t\t" + b);
+        if (a != null && b != null) model.addAttribute("output", String.format("Hello, dear %s %s", a, b));
         return "/html/lesson17Tantra";
     }
 
     @GetMapping("/try")
     public String getTry(
             @RequestParam(value = "a", required = false) String a,
-            @RequestParam(value = "b", required = false) String b
+            @RequestParam(value = "b", required = false) String b,
+            Model model
     ) {
-        if (a != null && b != null) log.info(a + "\t\t" + b);
+        if (a != null && b != null) model.addAttribute("output", String.format("Hello, dear %s %s", a, b));
         return "/html/lesson17Try";
     }
 }
