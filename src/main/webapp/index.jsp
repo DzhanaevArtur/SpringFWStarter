@@ -1,7 +1,21 @@
 <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Bairai</title>
+        <style>
+            body {
+                background-color: #000000;
+                color: #ffffff;
+                text-align: center;
+            }
+            a {
+                font-size: 40px;
+                color: #00a0ff;
+            }
+        </style>
+    </head>
     <body>
-        <h1>Bairai, Artur Dzhanaev!</h1>
-        <a href="/lesson15">Hello (Lesson15)</a>
+        <a href="/lesson15">Bairai (Lesson15)</a>
         <br>
         <a href="/miyagi/colors?a=Zero&b=Zero">Colors (Lesson17)</a>
         <br>
@@ -10,6 +24,8 @@
         <a href="/miyagi/try?a=Zero&b=Zero">Try (Lesson17)</a>
         <br>
         <a href="/calculator?a=23&b=3&op=MUL">Calculator (Lesson20)</a>
+        <br>
+        <a href="/people">People (Lesson21)</a>
         <br>
     </body>
 </html>

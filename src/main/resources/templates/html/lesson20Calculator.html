@@ -5,13 +5,17 @@
     <title>Calculator
     </title>
     <style>
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            text-align: center;
+        }
         p {
-            margin: auto;
-            font-size: 40px;
+            font-size: 200px;
         }
     </style>
 </head>
 <body>
-<p th:text="${output}"></p>
+<p th:text="${output}">0</p>
 </body>
 </html>
