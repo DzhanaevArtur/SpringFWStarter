@@ -1,9 +1,12 @@
 package ru.Dzhanaev.SpringFWStarter.lessons.mvc.lesson21;
 
 import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,16 +20,25 @@ public class PersonDAO {
 
     private static int ID = 1;
 
-    @Getter
-    private final List<Person> list = List.of(
-            new Person("Artur",   ID++),
-            new Person("Alan",    ID++),
-            new Person("Alex",    ID++),
-            new Person("Timur",   ID++),
-            new Person("Batradz", ID++),
-            new Person("Skif",    ID++),
-            new Person("Sarmat",  ID++)
-    );
+    @Getter @Setter
+    private List<Person> list;
 
-    public Person show(int id) { return list.stream().filter(x -> x.getId() == id).findAny().orElse(null); }
+
+    {
+        list = new ArrayList<>();
+        list.add(new Person("Artur",   ID++));
+        list.add(new Person("Alan",    ID++));
+        list.add(new Person("Alex",    ID++));
+        list.add(new Person("Timur",   ID++));
+        list.add(new Person("Batradz", ID++));
+        list.add(new Person("Skif",    ID++));
+        list.add(new Person("Sarmat",  ID++));
+    }
+
+    public Person show(int id) { return getList().stream().filter(x -> x.getId() == id).findAny().orElse(null); }
+
+    public void save(@NotNull Person person) {
+        person.setId(ID++);
+        getList().add(person);
+    }
 }

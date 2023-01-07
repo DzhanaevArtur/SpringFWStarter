@@ -5,9 +5,7 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author Artur Dzhanaev
@@ -35,5 +33,16 @@ public class PeopleController {
     public String show(@PathVariable("id") int id, @NotNull Model model) {
         model.addAttribute("person", personDAO.show(id));
         return "/html/lesson21PeopleShow";
+    }
+
+    @GetMapping("/new")
+    public String newPerson(@ModelAttribute Person person) {
+        return "/html/lesson22New";
+    }
+
+    @PostMapping()
+    public String create(@ModelAttribute Person person) {
+        personDAO.save(person);
+        return "redirect:/people";
     }
 }

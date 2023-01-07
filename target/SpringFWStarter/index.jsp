@@ -1,6 +1,7 @@
-<html>
-    <head>
-        <meta charset="UTF-8">
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
         <title>Bairai</title>
         <style>
             body {
@@ -15,17 +16,19 @@
         </style>
     </head>
     <body>
-        <a href="/lesson15">Bairai (Lesson15)</a>
+        <a href="/lesson15">Bairai(Lesson15)</a>
         <br>
-        <a href="/miyagi/colors?a=Zero&b=Zero">Colors (Lesson17)</a>
+        <a href="/miyagi/colors?a=Zero&b=Zero">Colors(Lesson17)</a>
         <br>
-        <a href="/miyagi/tantra?a=Zero&b=Zero">Tantra (Lesson17)</a>
+        <a href="/miyagi/tantra?a=Zero&b=Zero">Tantra(Lesson17)</a>
         <br>
-        <a href="/miyagi/try?a=Zero&b=Zero">Try (Lesson17)</a>
+        <a href="/miyagi/try?a=Zero&b=Zero">Try(Lesson17)</a>
         <br>
-        <a href="/calculator?a=23&b=3&op=MUL">Calculator (Lesson20)</a>
+        <a href="/calculator?a=23&b=3&op=MUL">Calculator(Lesson20)</a>
         <br>
-        <a href="/people">People (Lesson21)</a>
+        <a href="/people">People(Lesson21)</a>
+        <br>
+        <a href="/people/new">NewPerson(Lesson22)</a>
         <br>
     </body>
 </html>
