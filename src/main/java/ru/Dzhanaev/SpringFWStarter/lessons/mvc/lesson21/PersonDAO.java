@@ -29,13 +29,11 @@ public class PersonDAO {
 
     {
         list = new ArrayList<>();
-        list.add(new Person("Artur",   ID++));
-        list.add(new Person("Alan",    ID++));
-        list.add(new Person("Alex",    ID++));
-        list.add(new Person("Timur",   ID++));
-        list.add(new Person("Batradz", ID++));
-        list.add(new Person("Skif",    ID++));
-        list.add(new Person("Sarmat",  ID++));
+        list.add(new Person(ID++, "A", 33, "a@mpei.ru"));
+        list.add(new Person(ID++, "B", 43, "b@mpei.ru"));
+        list.add(new Person(ID++, "C", 19, "c@mpei.ru"));
+        list.add(new Person(ID++, "D", 82, "d@mpei.ru"));
+        list.add(new Person(ID++, "E", 46, "e@mpei.ru"));
     }
 
     /** Получение человека по ID */
@@ -45,7 +43,12 @@ public class PersonDAO {
     public void save(@NotNull Person person) { person.setId(ID++); getList().add(person); }
 
     /** Обновление имени человека с конкретным ID */
-    public void update(@NotNull Person person, int id) { show(id).setName(person.getName()); }
+    public void update(@NotNull Person person, int id) {
+        Person manToBeUpdated = show(id);
+        manToBeUpdated.setName(person.getName());
+        manToBeUpdated.setAge(person.getAge());
+        manToBeUpdated.setEmail(person.getEmail());
+    }
 
     /** Удаление человека по ID */
     public void delete(int id) { list.removeIf(x -> x.getId() == id); }

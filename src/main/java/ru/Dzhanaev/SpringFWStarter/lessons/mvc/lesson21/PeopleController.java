@@ -1,10 +1,12 @@
 package ru.Dzhanaev.SpringFWStarter.lessons.mvc.lesson21;
 
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -21,7 +23,10 @@ public class PeopleController {
     private final PersonDAO personDAO;
 
 
-    /** Конструктор */
+    /**
+     * Конструктор
+     * @param personDAO экземпляр БД
+     */
     @Contract(pure = true)
     public PeopleController(PersonDAO personDAO) { this.personDAO = personDAO; }
 
@@ -38,9 +43,9 @@ public class PeopleController {
 
     /**
      * Отображение конкретного человека по указанному id: /people/id
-     * @param id Идентификатор человека
      * @param model Получение доступа к модели в контроллере, через экземпляр класса Model, который внедряет Spring,
      *               для последующей отправки этой модели на шаблонизатор для отображения
+     * @param id Идентификатор человека
      */
     @GetMapping("/{id}")
     public String onlyOne(@NotNull Model model, @PathVariable("id") int id) {
@@ -49,6 +54,7 @@ public class PeopleController {
     }
 
     /**
+     * Отображение формы добавления человека в псевдоБД
      * @param person Создаваемый человек
      * @return Отображение формы добавления человека в псевдоБД
      */
@@ -60,19 +66,21 @@ public class PeopleController {
     /**
      * Обработка добавленного человека и последующее представление всех людей из БД
      * @param person Созданный человек
+     * @param bindingResult обработчик ошибок, вызываемых валидацией полей модели человека
      * @return Обновлённый список людей из БД
      */
     @PostMapping()
-    public String create(@ModelAttribute("person") Person person) {
+    public String create(@ModelAttribute("person") @Valid Person person, @NotNull BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) return "/html/lesson22New";
         personDAO.save(person);
         return "redirect:/people";
     }
 
     /**
      * Редактирование конкретного человека, по указанному id
-     * @param id Идентификатор человека
      * @param model Получение доступа к модели в контроллере, через экземпляр класса Model, который внедряет Spring,
      *               для последующей отправки этой модели на шаблонизатор для отображения
+     * @param id Идентификатор человека
      * @return Страница для редактирования человека
      */
     @GetMapping("/{id}/edit")
@@ -82,16 +90,28 @@ public class PeopleController {
     }
 
     /**
-     * Обработка изменения имени человека и последующее представление всех людей из БД
-     * @param person Отредактированный человек
+     * Обработка изменения полей человека с конкретным ID и последующее представление всех людей из БД
+     * @param person Обновляемый человек
+     * @param bindingResult обработчик ошибок, вызываемых валидацией полей модели человека
+     * @param id идентификатор человека
      * @return Обновлённый список людей из БД
      */
     @PatchMapping("/{id}")
-    public String update(@ModelAttribute("person") Person person, @PathVariable("id") int id) {
+    public String update(
+            @ModelAttribute("person") @Valid Person person,
+            @NotNull BindingResult bindingResult,
+            @PathVariable("id") int id
+    ) {
+        if (bindingResult.hasErrors()) return "/html/lesson23Edit";
         personDAO.update(person, id);
         return "redirect:/people";
     }
 
+    /**
+     * Удаление человека из БД
+     * @param id идентификатор человека
+     * @return Отображение всех людей после удаления
+     */
     @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") int id) {
         personDAO.delete(id);

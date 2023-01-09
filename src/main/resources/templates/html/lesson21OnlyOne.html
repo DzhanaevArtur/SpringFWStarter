@@ -19,8 +19,10 @@
     </style>
 </head>
 <body>
-<p th:text="${person.getName()}">Name</p>
-<p th:text="${person.getId()}">id</p>
+<p th:text="'ID is: '    + ${person.getId()}">ID is: </p>
+<p th:text="'Name is: '  + ${person.getName()}">Name is: </p>
+<p th:text="'Age is: '   + ${person.getAge()}">Age is: </p>
+<p th:text="'Email is: ' + ${person.getEmail()}">Email is: </p>
 <hr>
 <a th:href="@{/people/{id}/edit(id=${person.getId()})}" class="button" style="font-size: 50px">Edit</a>
 <form th:method="DELETE" th:action="@{/people/{id}(id=${person.getId()})}" th:object="${person}">

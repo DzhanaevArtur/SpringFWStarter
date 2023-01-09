@@ -13,6 +13,21 @@
                 font-size: 40px;
                 color: #00a0ff;
             }
+            a:link {
+                color: green;
+                background-color: transparent;
+                text-decoration: none;
+            }
+            a:visited {
+                color: #ffffff;
+                background-color: transparent;
+                text-decoration: none;
+            }
+            a:hover {
+                color: #499b54;
+                background-color: transparent;
+                text-decoration: none;
+            }
         </style>
     </head>
     <body>
