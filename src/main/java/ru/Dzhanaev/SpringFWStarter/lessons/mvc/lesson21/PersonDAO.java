@@ -19,8 +19,10 @@ import java.util.List;
 public class PersonDAO {
 
 
+    /** Уникальный инкрементирующий идентификатор */
     private static int ID = 1;
 
+    /** Список людей в БД с последующей инициализацией */
     @Getter @Setter
     private List<Person> list;
 
@@ -36,10 +38,15 @@ public class PersonDAO {
         list.add(new Person("Sarmat",  ID++));
     }
 
+    /** Получение человека по ID */
     public Person show(int id) { return getList().stream().filter(x -> x.getId() == id).findAny().orElse(null); }
 
-    public void save(@NotNull Person person) {
-        person.setId(ID++);
-        getList().add(person);
-    }
+    /** Добавление в БД нового человека */
+    public void save(@NotNull Person person) { person.setId(ID++); getList().add(person); }
+
+    /** Обновление имени человека с конкретным ID */
+    public void update(@NotNull Person person, int id) { show(id).setName(person.getName()); }
+
+    /** Удаление человека по ID */
+    public void delete(int id) { list.removeIf(x -> x.getId() == id); }
 }

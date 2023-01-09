@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Try</title>
@@ -8,32 +8,30 @@
             background-color: #000000;
             color: #ffffff;
             text-align: center;
+            font-size: 50px;
         }
         table {
             margin: auto;
         }
-        th {
-            font-size: 26px;
-        }
-        a {
-            font-size: 20px;
-            color: #00a0ff;
-        }
-        p {
-            font-size: 20px;
+        .button {
+            text-decoration: none;
+            background-color: #499b54;
+            border-radius: 15px;
+            color: #000000;
         }
     </style>
 </head>
 <body>
-<a href="/miyagi/colors?a=Nine&b=Ten">Tantra</a>
-<br>
-<a href="/miyagi/tantra?a=Eleven&b=Twelve">Try</a>
 <table>
     <tr><th>Life turn to hell when I'm turning around</th></tr>
     <tr><th>My hands in the air and I pray for you loud</th></tr>
     <tr><th>Show me the truth and show me the lie</th></tr>
     <tr><th>Mind over there, one of stars in the sky</th></tr>
 </table>
-<p th:text="${output}"></p>
+<p th:text="${output}">Output</p>
+<br>
+<a href="/miyagi/colors?a=One&b=Two" class="button">Colors</a>
+<br>
+<a href="/miyagi/tantra?a=Three&b=Four" class="button">Tantra</a>
 </body>
 </html>

@@ -1,7 +1,10 @@
 package ru.Dzhanaev.SpringFWStarter.lessons.mvc.lesson16;
 
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.ServletException;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 /**
@@ -20,4 +23,12 @@ public class SpringMVCDispatcherServletInitializer extends AbstractAnnotationCon
 
     @Override
     protected String @NotNull [] getServletMappings() { return new String[] {"/"}; }
+
+    /** Внутри фильтр для обработки DELETE, PATCH и PUT запросов внутри POST */
+    @Override
+    public void onStartup(@NotNull ServletContext servletContext) throws ServletException {
+        super.onStartup(servletContext);
+        servletContext.addFilter("hiddenHttpMethodFilter", new HiddenHttpMethodFilter())
+                .addMappingForUrlPatterns(null, true, "/*");
+    }
 }
