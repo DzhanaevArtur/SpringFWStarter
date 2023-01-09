@@ -12,6 +12,7 @@ import java.util.List;
 /**
  * @author Artur Dzhanaev
  * @created 07.01.2023
+ * @description ПсевдоБД
  */
 @Slf4j
 @Component

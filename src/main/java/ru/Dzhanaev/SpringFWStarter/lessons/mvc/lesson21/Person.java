@@ -8,6 +8,7 @@ import org.jetbrains.annotations.Contract;
 /**
  * @author Artur Dzhanaev
  * @created 07.01.2023
+ * @description Представление человека в виде объектной модели
  */
 @Slf4j
 @Getter
