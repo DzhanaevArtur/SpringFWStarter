@@ -37,7 +37,7 @@ public class PeopleController {
      */
     @GetMapping()
     public String full(@NotNull Model model) {
-        model.addAttribute("people", personDAO.getList());
+        model.addAttribute("people", personDAO.index());
         return "/html/lesson21Full";
     }
 

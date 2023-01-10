@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tantra</title>
+    <style>
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            text-align: center;
+            font-size: 50px;
+        }
+        table {
+            margin: auto;
+        }
+        .button {
+            text-decoration: none;
+            background-color: #499b54;
+            border-radius: 15px;
+            color: #000000;
+        }
+    </style>
+</head>
+<body>
+<table>
+    <tr><th>My inspiration, my experience, my legacy</th></tr>
+    <tr><th>Humanization is the only chance to be a family</th></tr>
+    <tr><th>My fucking patience is running out, but I believe</th></tr>
+    <tr><th>War will burn with racist and evil nationalist</th></tr>
+</table>
+<p th:text="${output}">Output</p>
+<br>
+<a href="/miyagi/colors?a=One&b=Two" class="button">Colors</a>
+<br>
+<a href="/miyagi/try?a=Three&b=Four" class="button">Try</a>
+</body>
+</html>

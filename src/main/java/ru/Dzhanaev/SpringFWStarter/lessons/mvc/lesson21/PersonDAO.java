@@ -1,11 +1,10 @@
 package ru.Dzhanaev.SpringFWStarter.lessons.mvc.lesson21;
 
-import lombok.Getter;
-import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,37 +18,68 @@ import java.util.List;
 public class PersonDAO {
 
 
-    /** Уникальный инкрементирующий идентификатор */
-    private static int ID = 1;
+    /** Ссылка для подключения к БД */
+    private final static String URL = "jdbc:postgresql://localhost:5432/first_db";
 
-    /** Список людей в БД с последующей инициализацией */
-    @Getter @Setter
-    private List<Person> list;
+    /** Имя пользователя БД */
+    private final static String username = "postgres";
+
+    /** Пароль от БД */
+    private final static String password = "blockPost";
+
+    /** Подключение к БД */
+    private static final Connection connection;
+
+    static {
+        try {
+            Class.forName("org.postgresql.Driver");
+            connection = DriverManager.getConnection(URL, username, password);
+        }
+        catch (SQLException | ClassNotFoundException e) { throw new RuntimeException(e); }
+    }
 
 
-    {
-        list = new ArrayList<>();
-        list.add(new Person(ID++, "A", 33, "a@mpei.ru"));
-        list.add(new Person(ID++, "B", 43, "b@mpei.ru"));
-        list.add(new Person(ID++, "C", 19, "c@mpei.ru"));
-        list.add(new Person(ID++, "D", 82, "d@mpei.ru"));
-        list.add(new Person(ID++, "E", 46, "e@mpei.ru"));
+    /** Список всех людей из БД */
+    public List<Person> index() {
+        List<Person> list = new ArrayList<>();
+        try {
+            ResultSet resultSet = connection.createStatement().executeQuery("SELECT * FROM person");
+            while (resultSet.next()) {
+                list.add(new Person(
+                        resultSet.getInt("id"),
+                        resultSet.getString("name"),
+                        resultSet.getInt("age"),
+                        resultSet.getString("email")
+                ));
+            }
+        }
+        catch (SQLException e) { throw new RuntimeException(e); }
+        return list;
     }
 
     /** Получение человека по ID */
-    public Person show(int id) { return getList().stream().filter(x -> x.getId() == id).findAny().orElse(null); }
+    public Person show(int id) { return index().stream().filter(x -> x.getId() == id).findAny().orElse(null); }
 
     /** Добавление в БД нового человека */
-    public void save(@NotNull Person person) { person.setId(ID++); getList().add(person); }
+    public void save(@NotNull Person person) {
+        try {
+            connection.createStatement().executeUpdate("INSERT INTO person VALUES(" +
+                    1 + ", '" + person.getName() + "', " + person.getAge() + ", '" + person.getEmail() + "')");
+        }
+        catch (SQLException e) { throw new RuntimeException(e); }
+    }
 
-    /** Обновление имени человека с конкретным ID */
+    /** Обновление полей человека с конкретным ID */
     public void update(@NotNull Person person, int id) {
-        Person manToBeUpdated = show(id);
-        manToBeUpdated.setName(person.getName());
-        manToBeUpdated.setAge(person.getAge());
-        manToBeUpdated.setEmail(person.getEmail());
+        person.setId(id);
     }
 
     /** Удаление человека по ID */
-    public void delete(int id) { list.removeIf(x -> x.getId() == id); }
+    public void delete(int id) {
+        try {
+            Statement statement = connection.createStatement();
+            statement.executeQuery(String.format("DELETE FROM person WHERE id = %d", id));
+        }
+        catch (SQLException e) { throw new RuntimeException(e); }
+    }
 }

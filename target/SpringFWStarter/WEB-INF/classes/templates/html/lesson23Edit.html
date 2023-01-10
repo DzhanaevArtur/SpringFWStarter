@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit</title>
+    <style>
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            text-align: center;
+            font-size: 100px;
+        }
+        .button {
+            text-decoration: none;
+            font-size: 50px;
+            border-radius: 15px;
+            color: #000000;
+        }
+        div {
+            color: #ff0000;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+<br>
+<form th:method="PATCH" th:action="@{/people/{id}(id=${person.getId()})}" th:object="${person}">
+    <label for="name">Enter name: </label>
+    <input type="text" th:field="*{name}" id="name" class="button"/>
+    <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name validation error</div>
+    <br/>
+    <label for="age">Enter age: </label>
+    <input type="text" th:field="*{age}" id="age" class="button"/>
+    <div th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age validation error</div>
+    <br/>
+    <label for="email">Enter email: </label>
+    <input type="text" th:field="*{email}" id="email" class="button"/>
+    <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email validation error</div>
+    <br/>
+    <input type="submit" value="Update!" class="button" style="background-color: #499b54;"/>
+</form>
+</body>
+</html>

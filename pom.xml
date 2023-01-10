@@ -172,6 +172,13 @@
             <version>2.0.6</version>
         </dependency>
 
+        <!--PostgreSQL JDBC Driver Postgresql-->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.5.1</version>
+        </dependency>
+
         <!--Unit-tests-->
         <dependency>
             <groupId>junit</groupId>

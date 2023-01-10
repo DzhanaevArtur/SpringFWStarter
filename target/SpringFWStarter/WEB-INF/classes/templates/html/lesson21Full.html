@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            text-align: center;
+        }
+        a {
+            font-size: 75px;
+        }
+        #info:link {
+            color: green;
+            background-color: transparent;
+            text-decoration: none;
+        }
+        #info:visited {
+            color: #ffffff;
+            background-color: transparent;
+            text-decoration: none;
+        }
+        #info:hover {
+            color: #499b54;
+            background-color: transparent;
+            text-decoration: none;
+        }
+        .button {
+            text-decoration: none;
+            font-size: 50px;
+            background-color: #499b54;
+            border-radius: 15px;
+            color: #000000;
+        }
+    </style>
+</head>
+<body>
+<div th:each="person : ${people}">
+    <a th:href="@{/people/{id}(id=${person.getId()})}"
+       th:text="'Person with name: ' + ${person.getName() + ' & age: ' + person.getAge()}" id="info">Name, age</a>
+</div>
+<hr>
+<a href="/people/new" class="button">Create new person</a>
+</body>
+</html>
