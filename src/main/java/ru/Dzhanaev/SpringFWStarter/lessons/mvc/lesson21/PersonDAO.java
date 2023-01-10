@@ -1,11 +1,13 @@
 package ru.Dzhanaev.SpringFWStarter.lessons.mvc.lesson21;
 
 import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,93 +20,44 @@ import java.util.List;
 public class PersonDAO {
 
 
-    /** Ссылка для подключения к БД */
-    private final static String URL = "jdbc:postgresql://localhost:5432/first_db";
+    /** Глобальное подключение к БД, прописанное в конфигурации */
+    private final JdbcTemplate jdbcTemplate;
 
-    /** Имя пользователя БД */
-    private final static String username = "postgres";
 
-    /** Пароль от БД */
-    private final static String password = "blockPost";
-
-    /** Подключение к БД */
-    private static final Connection connection;
-
-    static {
-        try {
-            Class.forName("org.postgresql.Driver");
-            connection = DriverManager.getConnection(URL, username, password);
-        }
-        catch (SQLException | ClassNotFoundException e) { throw new RuntimeException(e); }
-    }
-
+    @Autowired
+    @Contract(pure = true)
+    public PersonDAO(JdbcTemplate jdbcTemplate) { this.jdbcTemplate = jdbcTemplate; }
 
     /** Список всех людей из БД */
-    public List<Person> index() {
-        List<Person> list = new ArrayList<>();
-        try {
-            ResultSet resultSet = connection.createStatement().executeQuery("SELECT * FROM person");
-            while (resultSet.next()) {
-                list.add(new Person(
-                        resultSet.getInt("id"),
-                        resultSet.getString("name"),
-                        resultSet.getInt("age"),
-                        resultSet.getString("email")
-                ));
-            }
-        }
-        catch (SQLException e) { throw new RuntimeException(e); }
-        return list;
-    }
+    public List<Person> index() { return jdbcTemplate.query("SELECT * FROM person", new BeanPropertyRowMapper<>(Person.class)); }
 
     /** Получение человека по ID */
     public Person show(int id) {
-        Person person;
-        try {
-            PreparedStatement p = connection.prepareStatement("SELECT * FROM person where id=?");
-            p.setInt(1, id);
-            ResultSet resultSet = p.executeQuery();
-            resultSet.next();
-
-            person = new Person();
-            person.setId   (resultSet.getInt   ("id"));
-            person.setName (resultSet.getString("name"));
-            person.setAge  (resultSet.getInt   ("age"));
-            person.setEmail(resultSet.getString("email"));
-        } catch (SQLException e) { throw new RuntimeException(e); }
-        return person;
+        return jdbcTemplate.query("SELECT * FROM person where id=?", new BeanPropertyRowMapper<>(Person.class), id)
+                .stream()
+                .findAny()
+                .orElse(null);
     }
 
     /** Добавление в БД нового человека */
     public void save(@NotNull Person person) {
-        try {
-            PreparedStatement p = connection.prepareStatement("INSERT INTO person VALUES(1, ?, ?, ?)");
-
-            p.setString(1, person.getName());
-            p.setInt   (2, person.getAge());
-            p.setString(3, person.getEmail());
-            p.executeUpdate();
-        } catch (SQLException e) { throw new RuntimeException(e); }
+        jdbcTemplate.update("INSERT INTO person VALUES(1, ?, ?, ?)",
+                person.getName(),
+                person.getAge(),
+                person.getEmail()
+        );
     }
 
     /** Обновление полей человека с конкретным ID */
     public void update(@NotNull Person person, int id) {
-        try {
-            PreparedStatement p = connection.prepareStatement("UPDATE person SET name=?, age=?, email=? WHERE id=?");
-            p.setString(1, person.getName());
-            p.setInt   (2, person.getAge());
-            p.setString(3, person.getEmail());
-            p.setInt   (4, id);
-            p.executeUpdate();
-        } catch (SQLException e) { throw new RuntimeException(e); }
+        jdbcTemplate.update("UPDATE person SET name=?, age=?, email=? WHERE id=?",
+                person.getName(),
+                person.getAge(),
+                person.getEmail(),
+                id
+        );
     }
 
     /** Удаление человека по ID */
-    public void delete(int id) {
-        try {
-            PreparedStatement p = connection.prepareStatement("DELETE FROM person WHERE id=?");
-            p.setInt(1, id);
-            p.executeUpdate();
-        } catch (SQLException e) { throw new RuntimeException(e); }
-    }
+    public void delete(int id) { jdbcTemplate.update("DELETE FROM person WHERE id=?", id); }
 }
