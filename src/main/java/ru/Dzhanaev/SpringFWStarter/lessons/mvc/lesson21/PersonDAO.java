@@ -58,28 +58,53 @@ public class PersonDAO {
     }
 
     /** Получение человека по ID */
-    public Person show(int id) { return index().stream().filter(x -> x.getId() == id).findAny().orElse(null); }
+    public Person show(int id) {
+        Person person;
+        try {
+            PreparedStatement p = connection.prepareStatement("SELECT * FROM person where id=?");
+            p.setInt(1, id);
+            ResultSet resultSet = p.executeQuery();
+            resultSet.next();
+
+            person = new Person();
+            person.setId   (resultSet.getInt   ("id"));
+            person.setName (resultSet.getString("name"));
+            person.setAge  (resultSet.getInt   ("age"));
+            person.setEmail(resultSet.getString("email"));
+        } catch (SQLException e) { throw new RuntimeException(e); }
+        return person;
+    }
 
     /** Добавление в БД нового человека */
     public void save(@NotNull Person person) {
         try {
-            connection.createStatement().executeUpdate("INSERT INTO person VALUES(" +
-                    1 + ", '" + person.getName() + "', " + person.getAge() + ", '" + person.getEmail() + "')");
-        }
-        catch (SQLException e) { throw new RuntimeException(e); }
+            PreparedStatement p = connection.prepareStatement("INSERT INTO person VALUES(1, ?, ?, ?)");
+
+            p.setString(1, person.getName());
+            p.setInt   (2, person.getAge());
+            p.setString(3, person.getEmail());
+            p.executeUpdate();
+        } catch (SQLException e) { throw new RuntimeException(e); }
     }
 
     /** Обновление полей человека с конкретным ID */
     public void update(@NotNull Person person, int id) {
-        person.setId(id);
+        try {
+            PreparedStatement p = connection.prepareStatement("UPDATE person SET name=?, age=?, email=? WHERE id=?");
+            p.setString(1, person.getName());
+            p.setInt   (2, person.getAge());
+            p.setString(3, person.getEmail());
+            p.setInt   (4, id);
+            p.executeUpdate();
+        } catch (SQLException e) { throw new RuntimeException(e); }
     }
 
     /** Удаление человека по ID */
     public void delete(int id) {
         try {
-            Statement statement = connection.createStatement();
-            statement.executeQuery(String.format("DELETE FROM person WHERE id = %d", id));
-        }
-        catch (SQLException e) { throw new RuntimeException(e); }
+            PreparedStatement p = connection.prepareStatement("DELETE FROM person WHERE id=?");
+            p.setInt(1, id);
+            p.executeUpdate();
+        } catch (SQLException e) { throw new RuntimeException(e); }
     }
 }
