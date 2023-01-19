@@ -8,21 +8,28 @@
             background-color: #000000;
             color: #ffffff;
             text-align: center;
+            font-size: 50px;
         }
-        a {
-            font-size: 75px;
+        table {
+            width:100%;
+            table-layout: fixed;
         }
-        #info:link {
+        tr td a {
+            display:block;
+            table-layout: fixed;
+            width:100%;
+        }
+        #inside:link {
             color: green;
             background-color: transparent;
             text-decoration: none;
         }
-        #info:visited {
+        #inside:visited {
             color: #ffffff;
             background-color: transparent;
             text-decoration: none;
         }
-        #info:hover {
+        #inside:hover {
             color: #499b54;
             background-color: transparent;
             text-decoration: none;
@@ -37,9 +44,21 @@
     </style>
 </head>
 <body>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>ID</th>
+    </tr>
+</table>
 <div th:each="person : ${people}">
-    <a th:href="@{/people/{id}(id=${person.getId()})}"
-       th:text="'Name: ' + ${person.getName() + '; age: ' + person.getAge()}" id="info">Name, age</a>
+    <table>
+        <tr id="inside">
+            <td><a th:href="@{/people/{id}(id=${person.getId()})}" th:text="${person.getName()}">name</a></td>
+            <td><a th:href="@{/people/{id}(id=${person.getId()})}" th:text="${person.getAge()}">age</a></td>
+            <td><a th:href="@{/people/{id}(id=${person.getId()})}" th:text="${person.getEmail()}">email</a></td>
+        </tr>
+    </table>
 </div>
 <hr>
 <a href="/people/new" class="button">Create new person</a>

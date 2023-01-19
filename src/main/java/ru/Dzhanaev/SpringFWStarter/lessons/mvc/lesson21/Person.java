@@ -22,12 +22,12 @@ public class Person {
 
     /** Имя */
     @NotEmpty(message = "Name cannot be empty")
-    @Size(min = 2, max = 10, message = "Length cannot be lower then 2 & over then 30")
+    @Size(min = 2, max = 20, message = "Length cannot be lower then 2 & over then 30")
     private String name;
 
     /** Возраст */
     @Min(value = 1  , message = "Age must be over zero")
-    @Max(value = 100, message = "Age cannot be over 100")
+    @Max(value = 666, message = "Age cannot be over 666")
     private int age;
 
     /** Почтовый адрес */

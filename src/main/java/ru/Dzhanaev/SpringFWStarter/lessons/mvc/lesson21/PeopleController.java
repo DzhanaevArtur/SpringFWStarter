@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 public class PeopleController {
 
 
-    /** ПсевдоБД */
+    /** БД */
     private final PersonDAO personDAO;
 
 
@@ -31,7 +31,7 @@ public class PeopleController {
     public PeopleController(PersonDAO personDAO) { this.personDAO = personDAO; }
 
     /**
-     * Отображение списка всех людей из "БД"
+     * Отображение списка всех людей из БД
      * @param model Получение доступа к модели в контроллере, через экземпляр класса Model, который внедряет Spring,
      *               для последующей отправки этой модели на шаблонизатор для отображения
      */

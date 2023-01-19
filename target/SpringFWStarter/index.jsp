@@ -45,5 +45,7 @@
         <br>
         <a href="/people/new">NewPerson(Lesson22)</a>
         <br>
+        <a href="/test-batch-update">Batch(Lesson29)</a>
+        <br>
     </body>
 </html>
