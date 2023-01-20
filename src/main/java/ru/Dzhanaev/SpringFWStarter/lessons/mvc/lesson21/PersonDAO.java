@@ -34,13 +34,13 @@ public class PersonDAO {
 
     /** Список всех людей из БД */
     public List<Person> index() {
-        return jdbcTemplate.query("SELECT * FROM person", new BeanPropertyRowMapper<>(Person.class));
+        return jdbcTemplate.query("SELECT * FROM first_table", new BeanPropertyRowMapper<>(Person.class));
     }
 
     /** Получение человека по ID */
     public Person show(int id) {
         return jdbcTemplate
-                .query("SELECT * FROM person where id=?", new BeanPropertyRowMapper<>(Person.class), id)
+                .query("SELECT * FROM first_table where id=?", new BeanPropertyRowMapper<>(Person.class), id)
                 .stream()
                 .findAny()
                 .orElse(null);
@@ -48,7 +48,7 @@ public class PersonDAO {
 
     /** Добавление в БД нового человека */
     public void save(@NotNull Person person) {
-        jdbcTemplate.update("INSERT INTO person VALUES(1, ?, ?, ?)",
+        jdbcTemplate.update("INSERT INTO first_table(name, age, email) VALUES(?, ?, ?)",
                 person.getName(),
                 person.getAge(),
                 person.getEmail()
@@ -57,7 +57,7 @@ public class PersonDAO {
 
     /** Обновление полей человека с конкретным ID */
     public void update(@NotNull Person person, int id) {
-        jdbcTemplate.update("UPDATE person SET name=?, age=?, email=? WHERE id=?",
+        jdbcTemplate.update("UPDATE first_table SET name=?, age=?, email=? WHERE id=?",
                 person.getName(),
                 person.getAge(),
                 person.getEmail(),
@@ -66,12 +66,15 @@ public class PersonDAO {
     }
 
     /** Удаление человека по ID */
-    public void delete(int id) { jdbcTemplate.update("DELETE FROM person WHERE id=?", id); }
+    public void delete(int id) { jdbcTemplate.update("DELETE FROM first_table WHERE id=?", id); }
+
+    /** Удаление всех людей */
+    public void deleteAll() { jdbcTemplate.update("DELETE FROM first_table WHERE TRUE"); }
 
     /** Многократная отправка запроса */
     public void testMultipleUpdate() {
         long l = System.currentTimeMillis();
-        for (Person person : create1000People()) jdbcTemplate.update("INSERT INTO person VALUES(?, ?, ?, ?)",
+        for (Person person : create1000People()) jdbcTemplate.update("INSERT INTO first_table(name, age, email) VALUES(?, ?, ?)",
                 person.getId(), person.getName(), person.getAge(), person.getEmail());
         log.warn("Multiple time {}", System.currentTimeMillis() - l);
     }
@@ -80,13 +83,12 @@ public class PersonDAO {
     public void testBatchUpdate() {
         long l = System.currentTimeMillis();
         List<Person> people = create1000People();
-        jdbcTemplate.batchUpdate("INSERT INTO person VALUES(?, ?, ?, ?)", new BatchPreparedStatementSetter() {
+        jdbcTemplate.batchUpdate("INSERT INTO first_table(name, age, email) VALUES(?, ?, ?)", new BatchPreparedStatementSetter() {
 
             @Override public void setValues(@NotNull PreparedStatement ps, int i) throws SQLException {
-                ps.setInt   (1, people.get(i).getId());
-                ps.setString(2, people.get(i).getName());
-                ps.setInt   (3, people.get(i).getId());
-                ps.setString(4, people.get(i).getEmail());
+                ps.setString(1, people.get(i).getName());
+                ps.setInt   (2, people.get(i).getId());
+                ps.setString(3, people.get(i).getEmail());
             }
             @Override public int getBatchSize() { return people.size(); }
         });

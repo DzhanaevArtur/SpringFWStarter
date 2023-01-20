@@ -51,7 +51,7 @@
         <th>ID</th>
     </tr>
 </table>
-<div th:each="person : ${people}">
+<div th:each="person:${people}">
     <table>
         <tr id="inside">
             <td><a th:href="@{/people/{id}(id=${person.getId()})}" th:text="${person.getName()}">name</a></td>

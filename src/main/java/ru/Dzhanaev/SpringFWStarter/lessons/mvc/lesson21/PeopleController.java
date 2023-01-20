@@ -117,4 +117,14 @@ public class PeopleController {
         personDAO.delete(id);
         return "redirect:/people";
     }
+
+    /**
+     * Удаление всех людей из БД
+     * @return Отображение начальной страницы
+     */
+    @DeleteMapping("/delete")
+    public String deleteAll() {
+        personDAO.deleteAll();
+        return "redirect:";
+    }
 }

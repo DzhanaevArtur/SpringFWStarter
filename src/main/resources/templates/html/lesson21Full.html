@@ -10,11 +10,7 @@
             text-align: center;
             font-size: 50px;
         }
-        table {
-            width:100%;
-            table-layout: fixed;
-        }
-        tr td a {
+        table, tr, td, a {
             display:block;
             table-layout: fixed;
             width:100%;
@@ -44,6 +40,7 @@
     </style>
 </head>
 <body>
+<a href="/people/delete" class="button">Delete all</a>
 <table>
     <tr>
         <th>Name</th>
@@ -51,7 +48,7 @@
         <th>ID</th>
     </tr>
 </table>
-<div th:each="person : ${people}">
+<div th:each="person:${people}">
     <table>
         <tr id="inside">
             <td><a th:href="@{/people/{id}(id=${person.getId()})}" th:text="${person.getName()}">name</a></td>
