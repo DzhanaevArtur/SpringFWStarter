@@ -137,4 +137,11 @@ public class PeopleController {
         personDAO.deleteAll();
         return "redirect:";
     }
+
+    /**
+     * Возврат к истокам
+     * @return Отображение начальной страницы
+     */
+    @GetMapping("/back")
+    public String commonView() { return "/html/lesson41CommonView"; }
 }

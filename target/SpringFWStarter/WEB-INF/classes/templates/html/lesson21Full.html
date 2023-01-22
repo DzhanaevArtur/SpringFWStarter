@@ -9,11 +9,11 @@
             color: #ffffff;
             text-align: center;
             font-size: 50px;
+            width: 99%;
         }
-        table, tr, td, a {
-            display:block;
-            table-layout: fixed;
-            width:100%;
+        table, th, tr, td, div {
+            width: inherit;
+            text-align: center;
         }
         #inside:link {
             color: green;
@@ -36,28 +36,45 @@
             background-color: #499b54;
             border-radius: 15px;
             color: #000000;
+            position: fixed;
+            top: 20px;
+        }
+        #back {
+            left: 25px;
+        }
+        #creation {
+            position: sticky;
+        }
+        #deletion {
+            right: 25px;
         }
     </style>
 </head>
 <body>
-<a href="/people/delete" class="button">Delete all</a>
+<a href="/people/back" class="button" id="back">Go back</a>
+<a href="/people/new" class="button" id="creation">Create new person</a>
+<a href="/people/delete" class="button" id="deletion">Delete all</a>
+<br>
+<hr>
 <table>
     <tr>
+        <th>ID</th>
         <th>Name</th>
         <th>Age</th>
-        <th>ID</th>
+        <th>Email</th>
+        <th>Address</th>
     </tr>
 </table>
 <div th:each="person:${people}">
     <table>
         <tr id="inside">
+            <td><a th:href="@{/people/{id}(id=${person.getId()})}" th:text="${person.getId()}">id</a></td>
             <td><a th:href="@{/people/{id}(id=${person.getId()})}" th:text="${person.getName()}">name</a></td>
             <td><a th:href="@{/people/{id}(id=${person.getId()})}" th:text="${person.getAge()}">age</a></td>
             <td><a th:href="@{/people/{id}(id=${person.getId()})}" th:text="${person.getEmail()}">email</a></td>
+            <td><a th:href="@{/people/{id}(id=${person.getId()})}" th:text="${person.getAddress()}">address</a></td>
         </tr>
     </table>
 </div>
-<hr>
-<a href="/people/new" class="button">Create new person</a>
 </body>
 </html>

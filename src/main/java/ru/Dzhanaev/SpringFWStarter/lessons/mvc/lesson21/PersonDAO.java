@@ -55,19 +55,21 @@ public class PersonDAO {
 
     /** Добавление в БД нового человека */
     public void save(@NotNull Person person) {
-        jdbcTemplate.update("INSERT INTO Person(name, age, email) VALUES(?, ?, ?)",
+        jdbcTemplate.update("INSERT INTO Person(name, age, email, address) VALUES(?, ?, ?, ?)",
                 person.getName(),
                 person.getAge(),
-                person.getEmail()
+                person.getEmail(),
+                person.getAddress()
         );
     }
 
     /** Обновление полей человека с конкретным ID */
     public void update(@NotNull Person person, int id) {
-        jdbcTemplate.update("UPDATE Person SET name=?, age=?, email=? WHERE id=?",
+        jdbcTemplate.update("UPDATE Person SET name=?, age=?, email=?, address=? WHERE id=?",
                 person.getName(),
                 person.getAge(),
                 person.getEmail(),
+                person.getAddress(),
                 id
         );
     }
@@ -81,8 +83,15 @@ public class PersonDAO {
     /** Многократная отправка запроса */
     public void testMultipleUpdate() {
         long l = System.currentTimeMillis();
-        for (Person person : create1000People()) jdbcTemplate.update("INSERT INTO Person(name, age, email) VALUES(?, ?, ?)",
-                person.getId(), person.getName(), person.getAge(), person.getEmail());
+        for (Person person : create1000People()) {
+            jdbcTemplate.update("INSERT INTO Person(name, age, email, address) VALUES(?, ?, ?, ?)",
+                    person.getId(),
+                    person.getName(),
+                    person.getAge(),
+                    person.getEmail(),
+                    person.getAddress()
+            );
+        }
         log.warn("Multiple time {}", System.currentTimeMillis() - l);
     }
 
@@ -90,12 +99,14 @@ public class PersonDAO {
     public void testBatchUpdate() {
         long l = System.currentTimeMillis();
         List<Person> people = create1000People();
-        jdbcTemplate.batchUpdate("INSERT INTO Person(name, age, email) VALUES(?, ?, ?)", new BatchPreparedStatementSetter() {
+        jdbcTemplate.batchUpdate("INSERT INTO Person(name, age, email, address) VALUES(?, ?, ?, ?)",
+                new BatchPreparedStatementSetter() {
 
             @Override public void setValues(@NotNull PreparedStatement ps, int i) throws SQLException {
                 ps.setString(1, people.get(i).getName());
                 ps.setInt   (2, people.get(i).getId());
                 ps.setString(3, people.get(i).getEmail());
+                ps.setString(4, people.get(i).getAddress());
             }
             @Override public int getBatchSize() { return people.size(); }
         });
@@ -104,7 +115,9 @@ public class PersonDAO {
 
     private @NotNull List<Person> create1000People() {
         List<Person> list = new ArrayList<>();
-        for (int i = 0; i < 1000; i++) list.add(new Person(i, "xx" + i, i % 31, "test" + i + "@xx.ru"));
+        for (int i = 1; i < 100; i++) {
+            list.add(new Person(i, "x" + i, i, i + "@xx.ru", "Country, City, 123456"));
+        }
         return list;
     }
 }
