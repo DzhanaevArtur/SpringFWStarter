@@ -13,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Artur Dzhanaev
@@ -34,21 +35,27 @@ public class PersonDAO {
 
     /** Список всех людей из БД */
     public List<Person> index() {
-        return jdbcTemplate.query("SELECT * FROM first_table", new BeanPropertyRowMapper<>(Person.class));
+        return jdbcTemplate.query("SELECT * FROM Person", new BeanPropertyRowMapper<>(Person.class));
     }
 
     /** Получение человека по ID */
     public Person show(int id) {
         return jdbcTemplate
-                .query("SELECT * FROM first_table where id=?", new BeanPropertyRowMapper<>(Person.class), id)
+                .query("SELECT * FROM Person WHERE id=?", new BeanPropertyRowMapper<>(Person.class), id)
                 .stream()
                 .findAny()
                 .orElse(null);
     }
 
+    /** Получение сведений для PersonValidator о дублированной почте человека в БД */
+    public Optional<Person> show(String s) {
+        return jdbcTemplate.query("SELECT * FROM Person WHERE email=?", new BeanPropertyRowMapper<>(Person.class), s)
+                .stream().findAny();
+    }
+
     /** Добавление в БД нового человека */
     public void save(@NotNull Person person) {
-        jdbcTemplate.update("INSERT INTO first_table(name, age, email) VALUES(?, ?, ?)",
+        jdbcTemplate.update("INSERT INTO Person(name, age, email) VALUES(?, ?, ?)",
                 person.getName(),
                 person.getAge(),
                 person.getEmail()
@@ -57,7 +64,7 @@ public class PersonDAO {
 
     /** Обновление полей человека с конкретным ID */
     public void update(@NotNull Person person, int id) {
-        jdbcTemplate.update("UPDATE first_table SET name=?, age=?, email=? WHERE id=?",
+        jdbcTemplate.update("UPDATE Person SET name=?, age=?, email=? WHERE id=?",
                 person.getName(),
                 person.getAge(),
                 person.getEmail(),
@@ -66,15 +73,15 @@ public class PersonDAO {
     }
 
     /** Удаление человека по ID */
-    public void delete(int id) { jdbcTemplate.update("DELETE FROM first_table WHERE id=?", id); }
+    public void delete(int id) { jdbcTemplate.update("DELETE FROM Person WHERE id=?", id); }
 
     /** Удаление всех людей */
-    public void deleteAll() { jdbcTemplate.update("DELETE FROM first_table WHERE TRUE"); }
+    public void deleteAll() { jdbcTemplate.update("DELETE FROM Person WHERE TRUE"); }
 
     /** Многократная отправка запроса */
     public void testMultipleUpdate() {
         long l = System.currentTimeMillis();
-        for (Person person : create1000People()) jdbcTemplate.update("INSERT INTO first_table(name, age, email) VALUES(?, ?, ?)",
+        for (Person person : create1000People()) jdbcTemplate.update("INSERT INTO Person(name, age, email) VALUES(?, ?, ?)",
                 person.getId(), person.getName(), person.getAge(), person.getEmail());
         log.warn("Multiple time {}", System.currentTimeMillis() - l);
     }
@@ -83,7 +90,7 @@ public class PersonDAO {
     public void testBatchUpdate() {
         long l = System.currentTimeMillis();
         List<Person> people = create1000People();
-        jdbcTemplate.batchUpdate("INSERT INTO first_table(name, age, email) VALUES(?, ?, ?)", new BatchPreparedStatementSetter() {
+        jdbcTemplate.batchUpdate("INSERT INTO Person(name, age, email) VALUES(?, ?, ?)", new BatchPreparedStatementSetter() {
 
             @Override public void setValues(@NotNull PreparedStatement ps, int i) throws SQLException {
                 ps.setString(1, people.get(i).getName());

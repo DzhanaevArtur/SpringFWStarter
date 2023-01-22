@@ -8,7 +8,7 @@
             background-color: #000000;
             color: #ffffff;
             text-align: center;
-            font-size: 75px;
+            font-size: 50px;
         }
         .button {
             text-decoration: none;
@@ -16,19 +16,35 @@
             border-radius: 5px;
             color: #000000;
         }
+        input {
+            font-size: 50px;
+        }
+        table, tr, td, a {
+            display: table;
+            table-layout: fixed;
+            width:100%;
+        }
     </style>
 </head>
 <body>
+<a th:href="@{/people}" class="button">Back to list</a>
+<hr>
 <p th:text="'ID is: '    + ${person.getId()}">ID is: </p>
 <p th:text="'Name is: '  + ${person.getName()}">Name is: </p>
 <p th:text="'Age is: '   + ${person.getAge()}">Age is: </p>
 <p th:text="'Email is: ' + ${person.getEmail()}">Email is: </p>
 <hr>
-<a th:href="@{/people}" class="button" style="font-size: 50px">Back to list</a>
-<hr>
-<a th:href="@{/people/{id}/edit(id=${person.getId()})}" class="button" style="font-size: 50px">Edit</a>
-<form th:method="DELETE" th:action="@{/people/{id}(id=${person.getId()})}" th:object="${person}">
-    <input type="submit" value="Delete" class="button" style="font-size: 50px"/>
-</form>
+<table>
+    <tr>
+        <td>
+            <a th:href="@{/people/{id}/edit(id=${person.getId()})}" class="button">Edit</a>
+        </td>
+        <td>
+            <form th:method="DELETE" th:action="@{/people/{id}(id=${person.getId()})}" th:object="${person}">
+                <input type="submit" value="Delete" class="button"/>
+            </form>
+        </td>
+    </tr>
+</table>
 </body>
 </html>

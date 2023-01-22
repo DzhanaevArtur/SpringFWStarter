@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import ru.Dzhanaev.SpringFWStarter.lessons2.lesson40.PersonValidator;
 
 /**
  * @author Artur Dzhanaev
@@ -22,13 +23,20 @@ public class PeopleController {
     /** БД */
     private final PersonDAO personDAO;
 
+    /** Сущность валидации запросов в БД */
+    private final PersonValidator personValidator;
+
 
     /**
      * Конструктор
      * @param personDAO экземпляр БД
+     * @param personValidator валидация запросов в БД
      */
     @Contract(pure = true)
-    public PeopleController(PersonDAO personDAO) { this.personDAO = personDAO; }
+    public PeopleController(PersonDAO personDAO, PersonValidator personValidator) {
+        this.personDAO = personDAO;
+        this.personValidator = personValidator;
+    }
 
     /**
      * Отображение списка всех людей из БД
@@ -71,6 +79,7 @@ public class PeopleController {
      */
     @PostMapping()
     public String create(@ModelAttribute("person") @Valid Person person, @NotNull BindingResult bindingResult) {
+        personValidator.validate(person, bindingResult);
         if (bindingResult.hasErrors()) return "/html/lesson22New";
         personDAO.save(person);
         return "redirect:/people";
@@ -102,6 +111,7 @@ public class PeopleController {
             @NotNull BindingResult bindingResult,
             @PathVariable("id") int id
     ) {
+        personValidator.validate(person, bindingResult);
         if (bindingResult.hasErrors()) return "/html/lesson23Edit";
         personDAO.update(person, id);
         return "redirect:/people";
